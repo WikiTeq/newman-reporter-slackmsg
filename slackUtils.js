@@ -14,13 +14,11 @@ function slackMessage(stats, timings, failures, executions, maxMessageSize, coll
         {
             "mrkdwn_in": ["text"],
             "color": "#FF0000",
-            "author_name": "Newman Tests",
+            "author_name": "Automated test result",
             "title": ":fire: Failures :fire:",
             "fields": [
                 ${limitFailures > 0 ? failMessage(parsedFailures.splice(0, limitFailures)) : failMessage(parsedFailures)}
-            ],
-            "footer": "Newman Test",
-            "footer_icon": "https://platform.slack-edge.com/img/default_application_icon.png"
+            ]
         }
     ]`
     let successMessage = `
@@ -28,21 +26,15 @@ function slackMessage(stats, timings, failures, executions, maxMessageSize, coll
         {
             "mrkdwn_in": ["text"],
             "color": "#008000",
-            "author_name": "Newman Tests",
+            "author_name": "Automated test result",
             "title": ":white_check_mark: All Passed :white_check_mark:",
-            "footer": "Newman Test",
-            "footer_icon": "https://platform.slack-edge.com/img/default_application_icon.png"
         }
     ]`
     return jsonminify(`
     {
         "channel": "${channel}",
         "blocks": [
-            {
-                "type": "divider"
-            },
             ${collectionAndEnvironentFileBlock(collection, environment)}
-            ${reportingUrlSection(reportingUrl)}
             {
                 "type": "divider"
             },
@@ -120,12 +112,12 @@ function slackMessage(stats, timings, failures, executions, maxMessageSize, coll
 }
 
 function collectionAndEnvironentFileBlock(collection, environment) {
-    if (collection) {
+    if (environment) {
         return `{
             "type": "section",
 			"text": {
 				"type": "mrkdwn",
-				"text": "Collection: ${collection} \\n Environment: ${environment ? environment : ''}"
+				"text": "Environment: ${environment ? environment : ''}"
 			}
         }, `
     }
