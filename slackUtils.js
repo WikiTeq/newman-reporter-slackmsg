@@ -27,7 +27,7 @@ function slackMessage(stats, timings, failures, executions, maxMessageSize, coll
             "mrkdwn_in": ["text"],
             "color": "#008000",
             "author_name": "Automated test result",
-            "title": ":white_check_mark: All Passed :white_check_mark:",
+            "title": ":white_check_mark: All Passed :white_check_mark:"
         }
     ]`
     return jsonminify(`
