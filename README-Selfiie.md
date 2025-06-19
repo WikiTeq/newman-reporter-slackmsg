@@ -2,6 +2,17 @@
 
 This is a fork of the original [newman-reporter-slackmsg](https://github.com/jackcoded/newman-reporter-slackmsg) customized for Selfiie's specific needs.
 
+## Role in Selfiie API Monitoring
+
+This reporter is a crucial component of the `selfiie-api-monitor` project, which provides automated testing for Selfiie's FHIR API endpoints. For full details, see the `selfiie-api-monitor` documentation.
+
+### How it Works
+-   The API monitor is deployed as a Docker container.
+-   A Dockerized **Newman** instance executes a comprehensive Postman collection that tests critical API functionality, such as patient record processing, file uploads, and JSON schema validation.
+-   Tests are scheduled to run automatically every hour, managed by **Ofelia**, a Docker-based cron job scheduler.
+-   This **`newman-reporter-slackmsg`** reporter is used to send real-time notifications to Slack upon test completion.
+-   The `--reporter-slackmsg-failuresOnly` option is utilized to ensure that the team is only alerted when tests fail, reducing notification fatigue.
+
 ## What's Different in This Fork
 
 This fork includes several enhancements and customizations:
@@ -78,12 +89,6 @@ Use separate channels for different types of notifications:
 ```CLI
 newman run tests.json -e staging.json --suppress-exit-code -r slackmsg --reporter-slackmsg-webhookurl '<webhook>' --reporter-slackmsg-channel '#dev-status' --reporter-slackmsg-failuresChannel '#dev-alerts' --reporter-slackmsg-failuresOnly true
 ```
-
-## How It's Run At
-
-The API monitor is deployed as a Docker container.
-
-The tests are scheduled to run automatically every hour. This is managed by **Ofelia**. For more information, see the `selfiie-api-monitor` documentation.
 
 ## Original Repository
 
