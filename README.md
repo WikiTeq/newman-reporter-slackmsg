@@ -1,3 +1,5 @@
+> **Note:** This is the original README. For the version customized for Selfiie, please see **[README-Selfiie.md](README-Selfiie.md)**.
+
 # newman-reporter-slackmsg
 
 Custom [Newman](https://github.com/postmanlabs/newman) reporter to send message to [Slack](https://slack.com/)
@@ -40,10 +42,10 @@ or
 
 
 ## Reporter Options
-**webhookurl** 
+**webhookurl**
 Webhook URL to point to the slack api where results are published
 
-**collection** 
+**collection**
 Option to add the name of collection file onto the message
 
 **environment**
@@ -63,4 +65,3 @@ Option to select channel or user to receive failures
 
 **limitFailures**
 Option to limit the amount failures shown in slack
-
